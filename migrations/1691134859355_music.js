@@ -28,7 +28,7 @@ exports.up = pgm => {
             type: 'INT',
         },
         album_id: {
-            type: 'VARCHAR(50)',
+            type: 'TEXT',
         }
     });
     pgm.createTable('album', {

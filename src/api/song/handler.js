@@ -10,14 +10,14 @@ class SongHandler {
     async postSongHandler(request, h) {
         this._validator.validateSongPayload(request.payload);
         const { title = 'untitled', year, genre, performer, duration = '', albumId } = request.payload;
-        const songId = await this._service.addSong({
+        const song = await this._service.addSong({
             title, year, genre, performer, duration, albumId
         });
         const response = h.response({
             status: 'success',
             message: 'Lagu berhasil ditambahkan',
             data: {
-                songId,
+                song,
             },
         });
         response.code(201);
