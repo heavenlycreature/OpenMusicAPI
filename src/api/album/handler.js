@@ -53,7 +53,7 @@ class AlbumHandler {
             id: result.rows[0].album_id,
             name: result.rows[0].name,
             year: result.rows[0].year,
-            song: result.rows.map((songs) => ({
+            songs: result.rows.map((songs) => ({
                 id: songs.song_id,
                 title: songs.title,
                 performer: songs.performer,
