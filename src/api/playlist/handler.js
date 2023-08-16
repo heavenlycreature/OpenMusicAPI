@@ -13,7 +13,7 @@ class PlaylistHandler {
         const { name } = request.payload;
         const { id: credentialId } = request.auth.credentials;
 
-        const { playlistId } = await this._service.addPlaylist({
+        const playlistId = await this._service.addPlaylist({
             name,
             owner: credentialId,
         });

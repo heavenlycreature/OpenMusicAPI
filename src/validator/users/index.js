@@ -9,4 +9,4 @@ const UsersValidator = {
         }
     },
 }
-module.exports = { UsersValidator };
+module.exports = UsersValidator;
