@@ -140,11 +140,10 @@ const init = async () => {
             // penanganan client error secara internal.
             if (response instanceof ClientError) {
                 const newResponse = h.response({
-                    status: 'error',
-                    message: 'terjadi kegagalan pada server',
+                    status: 'fail',
+                    message: response.message,
                 });
-                newResponse.code(500);
-                console.error(response);
+                newResponse.code(response.statusCode);
                 return newResponse;
             }
             // penanganan client error oleh hapi (404, etc).
@@ -154,9 +153,10 @@ const init = async () => {
             // penanganan server error 
             const newResponse = h.response({
                 status: 'error',
-                message: 'terjadi kegagalan pada server',
+                message: 'Maaf terjadi kegagalan pada server kami',
             });
             newResponse.code(500);
+            console.error(response);
             return newResponse;
         }
         // jika bukan error, lanjutkan response sebelumnya

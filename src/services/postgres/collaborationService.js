@@ -3,9 +3,9 @@ const { Pool } = require('pg');
 const InvariantError = require('../../exception/invariantError');
 
 class CollaborationsService {
-    constructor(usersSservice) {
+    constructor(usersService) {
         this._pool = new Pool();
-        this._usersService = usersSservice;
+        this._usersService = usersService;
     }
 
     async addCollaboration(playlistId, userId) {

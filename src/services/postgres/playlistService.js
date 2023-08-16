@@ -149,16 +149,17 @@ class PlaylistsService {
         await this._activitiesService.deletePlaylistActivity(playlistId, userId, songId)
     }
 
-    async getPlaylistActivities(playlistId) {
-        const query = {
-            text: 'SELECT b.username, c.title, a.action, a.time FROM playlist_song_activities a left join users b on a.user_id = b.id left join songs c on c.id = a.song_id  WHERE a.playlist_id = $1 ORDER BY a.time ASC',
-            values: [playlistId]
-        }
-
-        const result = await this._pool.query(query)
-
-        return result.rows
-    }
+    // async getPlaylistActivities(playlistId, owner) {
+    //     const query = {
+    //         text: 'SELECT users.username, song.title, playlist_activities.action, playlist_activities.time FROM playlist_activities JOIN playlists ON playlist_activities.playlist_id = playlists.id JOIN song ON playlist_activities.song_id = song.song_id JOIN users ON users.id = playlist_activities.user_id LEFT JOIN collaborations ON collaborations.playlist_id = playlist_activities.id WHERE playlists.id = $1 AND playlists.owner = $2 OR collaborations.userid = $2 ORDER BY playlist_activities.time ASC',
+    //         values: [playlistId, owner]
+    //     }
+    //     const result = await this._pool.query(query)
+    //     if (!result.rowCount) {
+    //         throw new NotFoundError('Playlist tidak ada');
+    //     }
+    //     return result.rows;
+    // }
 }
 
-module.exports = PlaylistsService
+module.exports = PlaylistsService;

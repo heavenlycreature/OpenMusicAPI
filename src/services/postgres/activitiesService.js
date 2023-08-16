@@ -38,4 +38,4 @@ class ActivitiesService {
     }
 }
 
-module.exports = ActivitiesService
+module.exports = ActivitiesService;

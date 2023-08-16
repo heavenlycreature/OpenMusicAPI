@@ -14,7 +14,7 @@ class PlaylistHandler {
         const { id: credentialId } = request.auth.credentials;
 
         const playlistId = await this._service.addPlaylist({
-            name,
+            playlistName: name,
             owner: credentialId,
         });
 
@@ -113,27 +113,22 @@ class PlaylistHandler {
         };
     }
 
-    async getPlaylistActivitiesHandler(request) {
-        const { id: playlistId } = request.params;
-        const { id: credentialId } = request.auth.credentials;
+    // async getPlaylistActivitiesHandler(request) {
+    //     const { id: playlistId } = request.params;
+    //     const { id: credentialId } = request.auth.credentials;
 
-        await this._service.verifyAccessUser(credentialId, playlistId);
+    //     await this._service.verifyAccessUser(credentialId, playlistId);
 
-        const activitiesFiltered = await this._service.getPlaylistActivities(playlistId);
+    //     let activitiesFiltered = await this._service.getPlaylistActivities(playlistId, credentialId);
 
-        return {
-            status: 'success',
-            data: {
-                playlistId,
-                activities: activitiesFiltered.map((activity) => ({
-                    username: activity.username,
-                    title: activity.title,
-                    action: activity.action,
-                    time: activity.time,
-                })),
-            },
-        };
-    }
+    //     return {
+    //         status: 'success',
+    //         data: {
+    //             playlistId,
+    //             activities: activitiesFiltered,
+    //         }
+    //     };
+    // }
 }
 
 module.exports = PlaylistHandler;
