@@ -163,21 +163,21 @@ class PlaylistsService {
 
 
     // adding playlist activities
-    async addPlaylistActivities(playlistId, songId, userId, Action) {
-        const id = `Activities-${nanoid(16)}`;
-        const time = new Date().toISOString();
-        const query = {
-            Text: 'INSERT INTO playlist_activities VALUES($1,$2,$3,$4,$5,$6) RETURNING id',
-            values: [id, playlistId, songId, userId, Action, time],
-        };
-        const result = await this._pool.query(query);
+    // async addPlaylistActivities(playlistId, songId, userId, Action) {
+    //     const id = `Activities-${nanoid(16)}`;
+    //     const time = new Date().toISOString();
+    //     const query = {
+    //         Text: 'INSERT INTO playlist_activities VALUES($1,$2,$3,$4,$5,$6) RETURNING id',
+    //         values: [id, playlistId, songId, userId, Action, time],
+    //     };
+    //     const result = await this._pool.query(query);
 
-        if (!result.rows[0].id) {
-            throw new InvariantError('Gagal menyimpan activity');
-        }
+    //     if (!result.rows[0].id) {
+    //         throw new InvariantError('Gagal menyimpan activity');
+    //     }
 
-        return result.rows[0].id;
-    }
+    //     return result.rows[0].id;
+    // }
 
     // async getPlaylistActivities(playlistId, owner) {
     //     const query = {
