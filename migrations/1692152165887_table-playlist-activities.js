@@ -13,7 +13,7 @@ exports.up = (pgm) => {
             notNull: true,
         },
         song_id: {
-            type: 'INTEGER',
+            type: 'TEXT',
             notNull: true,
         },
         user_id: {
@@ -36,6 +36,8 @@ exports.up = (pgm) => {
     );
     pgm.addConstraint('playlist_activities', 'fk_playlist_activities.song_id_songs.id', 'FOREIGN KEY(song_id) REFERENCES song(song_id) ON DELETE CASCADE');
     pgm.addConstraint('playlist_activities', 'fk_playlist_activities.user_id_users.id', 'FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE');
+
+
 };
 
 exports.down = (pgm) => {
