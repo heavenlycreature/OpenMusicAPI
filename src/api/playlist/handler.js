@@ -116,17 +116,17 @@ class PlaylistHandler {
     }
 
     // async getPlaylistActivitiesHandler(request) {
-    //     const { id } = request.params;
+    //     const { id: playlistId } = request.params;
     //     const { id: credentialId } = request.auth.credentials;
 
-    //     await this._playlistsService.verifyAccessUser(credentialId, id);
+    //     await this._playlistsService.verifyAccessUser(credentialId, playlistId);
 
-    //     let activities = await this._playlistsService.getPlaylistActivities(id, credentialId);
+    //     let activities = await this._playlistsService.getPlaylistActivities(playlistId, credentialId);
 
     //     return {
     //         status: 'success',
     //         data: {
-    //             playlistId: id,
+    //             playlistId,
     //             activities,
     //         }
     //     };
