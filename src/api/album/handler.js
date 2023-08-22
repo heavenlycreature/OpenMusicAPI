@@ -1,9 +1,10 @@
 const autoBind = require('auto-bind');
 
 class AlbumHandler {
-    constructor(service, validator) {
+    constructor(service, validator, storageService) {
         this._service = service;
         this._validator = validator;
+        this._storageService = storageService;
 
         autoBind(this); //binding semua nilai
     }
@@ -86,6 +87,47 @@ class AlbumHandler {
             status: 'success',
             message: 'Album dihapus',
         }
+    }
+
+    async postLikeAlbumHandler(request, h) {
+        const { id } = request.params;
+        const { id: userId } = request.auth.credentials;
+        await this._service.verifyUserLike(id, userId);
+
+        await this._service.userLike(userId, id)
+        const response = h.response({
+            status: 'success',
+            message: 'Like album berhasil ditambahkan ke daftar ',
+        });
+        response.code(201);
+        return response;
+    }
+
+    async getLikeAlbumHandler(request, h) {
+        const { id } = request.params;
+        const { likes, cached } = await this._service.getLikeAlbum(id);
+
+        const response = h.response({
+            status: 'success',
+            data: {
+                likes,
+            },
+        });
+
+        if (cached) {
+            response.header('X-Data-Source', 'cache')
+        }
+        return response;
+    }
+    async deleteLikeAlbumHandler(request) {
+        const { id } = request.params;
+        const { id: credentialId } = request.auth.credentials;
+
+        await this._service.userDislike(credentialId, id);
+        return {
+            status: 'success',
+            message: 'Berhasil membatalkan like',
+        };
     }
 }
 module.exports = AlbumHandler;
