@@ -21,10 +21,12 @@ const albumDBToModel = ({
     album_id,
     name,
     year,
+    cover,
 }) => ({
     id: album_id,
     name,
     year,
+    coverUrl: cover
 });
 
 module.exports = { songDBToModel, albumDBToModel };
